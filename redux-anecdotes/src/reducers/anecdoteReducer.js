@@ -1,39 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 // Exercise 6.10
-const anecdotesAtStart = [
-  'If it hurts, do it more often',
-  'Adding manpower to a late software project makes it later!',
-  'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
-  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-  'Premature optimization is the root of all evil.',
-  'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
-]
-
-const getId = () => (100000 * Math.random()).toFixed(0)
-
-const asObject = (anecdote) => {
-  return {
-    content: anecdote,
-    id: getId(),
-    votes: 0
-  }
-}
-
-const initialState = anecdotesAtStart.map(asObject)
-
-// Exercise 6.10
 const anecdoteSlice = createSlice({
   name: 'anecdotes',
-  initialState,
+  // Exercise 6.13
+  initialState: [],
   reducers: {
     createAnecdote(state, action) {
-      const content = action.payload
-      state.push({
-        content,
-        id: getId(),
-        votes: 0
-      })
+      // Exercise 6.14
+      state.push(action.payload)
     },
     increaseAnecdoteVotes(state, action){
       const id = action.payload
@@ -45,8 +20,17 @@ const anecdoteSlice = createSlice({
       return state.map(note =>
         note.id !== id ? note : changedAnecdote
       )
+    },
+    appendAnecdote(state, action) {
+      state.push(action.payload)
+    },
+    // Exercise 6.13
+    setAnecdote(state, action) {
+      return action.payload
     }
   }
 })
 
-export default anecdoteSlice
+export const {createAnecdote, increaseAnecdoteVotes, appendAnecdote, setAnecdote} = anecdoteSlice.actions
+
+export default anecdoteSlice.reducer

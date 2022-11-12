@@ -5,12 +5,16 @@ import { configureStore } from '@reduxjs/toolkit'
 
 // Ex. 6.9
 const store = configureStore({reducer: {
-    anecdotes: anecdoteReducer.reducer,
+    anecdotes: anecdoteReducer,
     notification: notificationReducer.reducer,
     filter: filterReducer.reducer
 }})
-//const store = configureStore({reducer})
 // Para ver el store cada vez que se actualiza
-//store.subscribe(() => console.log(store.getState()))
+
+/*
+anecdoteService.getAll().then(anecdotes =>
+    store.dispatch(setAnecdote(anecdotes))
+)
+*/
 
 export default store;
