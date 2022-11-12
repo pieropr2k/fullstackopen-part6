@@ -1,4 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
+import { updateAnecdoteVotes } from '../reducers/anecdoteReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
 const Anecdote = ({ anecdote }) => {
   // The useDispatch-hook provides any React component access 
@@ -6,14 +8,11 @@ const Anecdote = ({ anecdote }) => {
   // This allows all components to make changes to the state of the redux-store
   const dispatch = useDispatch()
 
-  const vote = (id) => {
-    dispatch({ type: 'anecdotes/increaseAnecdoteVotes', payload: id })
-
-    // Exercise 6.11
-    dispatch({ type: 'notification/setNotificationMessage', payload: `you voted '${anecdote.content}'`})
-    setTimeout(() => {
-      dispatch({ type: 'notification/removeNotificationMessage'})
-    }, '5000')
+  const vote = async (id) => {
+    // Exercise 6.17
+    dispatch(updateAnecdoteVotes(id))
+    // Exercise 6.18
+    dispatch(setNotification(`you voted '${anecdote.content}'`, 5))
   }
 
   return (

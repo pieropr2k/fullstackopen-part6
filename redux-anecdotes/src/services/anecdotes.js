@@ -13,11 +13,17 @@ const createNew = async (content) => {
     content,
     votes: 0
   }
-  //{ content, important: false }
   const response = await axios.post(baseUrl, object)
   return response.data
 }
 
-const anecdoteService = { getAll, createNew }
+// Exercise 6.17
+const updateVotes = async (id) => {
+  const preResponse = await axios.get(`${baseUrl}/${id}`)
+  const response = await axios.put(`${baseUrl}/${id}`, {...preResponse.data, votes: preResponse.data.votes + 1})
+  return response.data
+}
+
+const anecdoteService = { getAll, createNew, updateVotes }
 
 export default anecdoteService

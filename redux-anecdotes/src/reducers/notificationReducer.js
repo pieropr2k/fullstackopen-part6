@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 // Exercise 6.11
-const anecdoteSlice = createSlice({
+const notificationSlice = createSlice({
   name: 'notification',
   initialState: null,
   reducers: {
@@ -17,4 +17,16 @@ const anecdoteSlice = createSlice({
   }
 })
 
-export default anecdoteSlice
+export const {setNotificationMessage, removeNotificationMessage} = notificationSlice.actions
+
+// Exercise 6.18
+export const setNotification = (message, time) => {
+  return async dispatch => {
+    dispatch(setNotificationMessage(message))
+    setTimeout(() => {
+      dispatch(removeNotificationMessage())
+    }, time*1000)
+  }
+}
+
+export default notificationSlice.reducer
