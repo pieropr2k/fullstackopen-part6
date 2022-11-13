@@ -1,13 +1,12 @@
-import { useDispatch } from "react-redux"
+import { connect } from "react-redux"
+import { setFilteredWord } from "../reducers/filterReducer"
 
-const Filter = () => {
-  const dispatch = useDispatch()
-  
-  // Exercise 6.12
+const Filter = ({setFilteredWord}) => {
+  // Exercise 6.20
   const handleChange = (event) => {
     event.preventDefault()
     // input-field value is in variable event.target.value
-    dispatch({ type: 'filter/setFilteredWord', payload: event.target.value })
+    setFilteredWord(event.target.value)
   }
   const style = {
     marginBottom: 10
@@ -20,4 +19,19 @@ const Filter = () => {
   )
 }
 
-export default Filter
+// Exercise 6.20
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setFilteredWord: value => {
+      dispatch(setFilteredWord(value))
+    }
+  }
+}
+
+const ConnectedFilter = connect(
+  null,
+  mapDispatchToProps
+)(Filter)
+
+export default ConnectedFilter

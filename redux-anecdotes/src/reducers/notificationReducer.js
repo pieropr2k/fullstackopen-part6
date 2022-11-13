@@ -19,13 +19,17 @@ const notificationSlice = createSlice({
 
 export const {setNotificationMessage, removeNotificationMessage} = notificationSlice.actions
 
-// Exercise 6.18
+// Exercise 6.21
+let timeoutID = null;
+
 export const setNotification = (message, time) => {
   return async dispatch => {
+    // Exercise 6.21
+    clearTimeout(timeoutID)
     dispatch(setNotificationMessage(message))
-    setTimeout(() => {
+    timeoutID = setTimeout(() => {
       dispatch(removeNotificationMessage())
-    }, time*1000)
+    }, time * 1000)
   }
 }
 

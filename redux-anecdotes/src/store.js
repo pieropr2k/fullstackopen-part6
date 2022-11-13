@@ -7,7 +7,7 @@ import { configureStore } from '@reduxjs/toolkit'
 const store = configureStore({reducer: {
     anecdotes: anecdoteReducer,
     notification: notificationReducer,
-    filter: filterReducer.reducer
+    filter: filterReducer
 }})
 // Para ver el store cada vez que se actualiza
 
